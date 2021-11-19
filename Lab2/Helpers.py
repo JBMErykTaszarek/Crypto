@@ -1,3 +1,11 @@
+from Crypto.Cipher import AES
+from base64 import b64decode
+import binascii
+from textwrap import wrap
+import random
+from math import ceil
+
+
 def split(a, n):
     k, m = divmod(len(a), n)
     return (a[i*k+min(i, m):(i+1)*k+min(i+1, m)] for i in range(n))
@@ -27,3 +35,9 @@ def saveDecryptedMessageFromBlocks(blocks, filePath):
         for char in block:
             returnString+= chr(char)
         f.write(returnString + "\n")
+
+def generateInitialVector():
+    key = ""
+    for i in range(0,16):
+        key+= str(bin(random.randint(0,255)[2:])).zfill(8)
+    return key
