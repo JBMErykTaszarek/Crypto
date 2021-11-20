@@ -59,3 +59,8 @@ def generateInitialVector():
     for i in range(0,16):
         key+= str(bin(random.randint(0,255)[2:])).zfill(8)
     return key
+
+def readInput(path):
+    with open(path) as f:
+        content = f.readlines()
+    return str(content[0])

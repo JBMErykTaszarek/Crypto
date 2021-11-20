@@ -34,19 +34,19 @@ def Lab1(bbs):
     test.pokerTest()
 
 def Lab2():
-    ecbObj = ecb.ECBCipher("asdghe3#$%aasd6rgdFWW$#$yerye6434^#$#4teqRhjSRTnfzetye6s4z5t", "xyzW3abdefsykl12")
+    ecbObj = ecb.ECBCipher()
     ecbObj.Encrypt()
     ecbObj.Decrypt()
     Helpers.saveDecryptedMessageFromBlocks(ecbObj.encryptedBlocksArray, "Lab2/Outputs/EcbEncrypted.txt")
     Helpers.saveDecryptedMessageFromBlocks(ecbObj.decryptedBlocksArray, "Lab2/Outputs/EcbDecrypted.txt", False)
 
-    cbcObj = cbc.CBCCipher("asdghe3#$%aasd6rgdFWW$#$yerye6434^#$#4teqRhjSRTnfzetye6s4z5t", "xyzW3abdefsykl12")
+    cbcObj = cbc.CBCCipher()
     cbcObj.Encrypt()
     cbcObj.Decrypt()
     Helpers.saveDecryptedMessageFromBlocks(cbcObj.encryptedBlocksArray, "Lab2/Outputs/CbcEncrypted.txt")
     Helpers.saveDecryptedMessageFromBlocks(cbcObj.decryptedBlocksArray, "Lab2/Outputs/CbcDecrypted.txt", False)
 
-    pbcObj = pbc.PBCCipher("asdghe3#$%aasd6rgdFWW$#$yerye6434^#$#4teqRhjSRTnfzetye6s4z5t", "xyzW3abdefsykl12")
+    pbcObj = pbc.PBCCipher()
     pbcObj.Encrypt()
     pbcObj.Decrypt()
     Helpers.saveDecryptedMessageFromBlocks(pbcObj.encryptedBlocksArray, "Lab2/Outputs/PbcEncrypted.txt")
@@ -61,9 +61,9 @@ def Lab3():
 if __name__ == '__main__':
     #Lab1(bbs)
 
-    #Lab2()
+    Lab2()
 
-    Lab3()
+    #Lab3()
     #zadanie 2
     '''
     blockA = bc.blockCipher(text ="asdghe3#$%aasd6rgdFWW$#$yerye6434^#$#4teqRhjSRTnfzetye6s4z5t", key = "xyzW3abdefsykl12")

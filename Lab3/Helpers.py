@@ -45,3 +45,8 @@ def readInput(path):
     with open(path) as f:
         content = f.readlines()
     return str(content[0])
+
+def getRandomPrimeNumber():
+    primes = [i for i in range(1000, 9999) if isPrime(i)]
+    propabblyPrime = random.choice(primes)
+    return propabblyPrime

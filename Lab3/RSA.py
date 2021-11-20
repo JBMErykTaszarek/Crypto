@@ -9,8 +9,8 @@ from Lab3 import Helpers
 
 class RSA(object):
     def __init__(self):
-        self.p = 31
-        self.q = 19
+        self.p = 211 #1129
+        self.q = 101 #2207
         self.n = self.p * self.q
         self.phi = (self.p-1) * (self.q-1)
         self.e = Helpers.getE(self.phi)
