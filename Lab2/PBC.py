@@ -34,8 +34,8 @@ class PBCCipher(object):
             cipher = AES.new(self.cipherKey, AES.MODE_ECB)
             for byt in cipher.encrypt(bytes(Helpers.getBytes(tempToEncrypt))):
                 returnArray.append(byt)
-            self.encryptedBlocksArray.append(block)
-            self.currentCipherIV = returnArray
+            self.encryptedBlocksArray.append(returnArray)
+            self.currentCipherIV = block
 
     def Decrypt(self):
         self.currentCipherIV = self.cipherIV
@@ -48,7 +48,6 @@ class PBCCipher(object):
             for byt in decipher.decrypt(bytes(block)):
                 returnArray.append(byt)
             xoredResult = Helpers.xor(Helpers.getBits(self.currentCipherIV), Helpers.getBits(returnArray))
-            self.currentCipherIV = returnArray
-            print(xoredResult)
+            self.currentCipherIV = Helpers.getBytes(xoredResult)
             self.decryptedBlocksArray.append(Helpers.getBytes(xoredResult))
             print(self.decryptedBlocksArray)

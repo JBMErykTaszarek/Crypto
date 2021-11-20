@@ -1,0 +1,1 @@
+This is sample message. Just encrypt this text becouse someone can read this!

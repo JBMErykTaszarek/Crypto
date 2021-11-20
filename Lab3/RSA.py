@@ -4,51 +4,39 @@ import binascii
 from textwrap import wrap
 import random
 from math import ceil
-from Lab2 import Helpers
+from Lab3 import Helpers
 
 
 class RSA(object):
-    def __init__(self, text="", key=""):
+    def __init__(self):
         self.p = 31
         self.q = 19
         self.n = self.p * self.q
-        self.fi = (self.p-1) * (self.q-1)
-
-        if key != "":  # jeżeli użytkownik żadnego nie podał
-            tempKey = str.encode(key)
-            if len(tempKey) != 16:
-                print("Klucz nie składa się z 16 bajtów !! Użyto domyślnego")
-            else:
-                self.cipherKey = tempKey
-        if len(text) == 0:
-            print("Nie podano wiadomości do szyfrowania!!")
-        else:
-            self.textToEncrypt = Helpers.prepareText(text)  # przygotowanie tekstu do szyfrowania - dopełnienie i zmiana na bajty
+        self.phi = (self.p-1) * (self.q-1)
+        self.e = Helpers.getE(self.phi)
+        self.d = Helpers.getD(self.e,self.phi)
+        self.encryptedMessage = []
+        self.decryptedMessage = []
+        self.input = Helpers.readInput("Lab3/input.txt")
 
 
     def Encrypt(self):
-        blocks = list(Helpers.split(self.textToEncrypt, ceil(len(self.textToEncrypt) / 16)))
-        for block in blocks:
-            tempToEncrypt =  Helpers.xor(Helpers.getBits(block),Helpers.getBits(self.currentCipherIV))
-            returnArray = []
-            cipher = AES.new(self.cipherKey, AES.MODE_ECB)
-            for byt in cipher.encrypt(bytes(Helpers.getBytes(tempToEncrypt))):
-                returnArray.append(byt)
-            self.encryptedBlocksArray.append(returnArray)
-            self.currentCipherIV = returnArray
+        temp=""
+        for char in str.encode(self.input):
+            temp+=str(int(Helpers.digitsSave(char)))
+        print("input:")
+        print(temp)
+        for m in wrap(temp,3):
+            self.encryptedMessage.append(int(m)**self.e%self.n)
+        print("zaszyfrowana")
+        print(self.encryptedMessage)
+
+        Helpers.saveArrayToFile(self.encryptedMessage, "Lab3/Outputs/RsaEncrypted.txt")
 
     def Decrypt(self):
-        self.currentCipherIV = self.cipherIV
-        decipher = AES.new(self.cipherKey, AES.MODE_ECB)
-        for block in self.encryptedBlocksArray:
-            returnArray = []
-            blockOffset = 16 - len(block)
-            while len(block)!=16:
-                block.append(blockOffset)
-            for byt in decipher.decrypt(bytes(block)):
-                returnArray.append(byt)
-            xoredResult = Helpers.xor(Helpers.getBits(self.currentCipherIV), Helpers.getBits(returnArray))
-            self.currentCipherIV = block
-            print(xoredResult)
-            self.decryptedBlocksArray.append(Helpers.getBytes(xoredResult))
-            print(self.decryptedBlocksArray)
+        for char in self.encryptedMessage:
+            decryptedChar = int(char) ** self.d % self.n
+            self.decryptedMessage.append(Helpers.digitsSave(decryptedChar, False))
+        print("odszyfrowana")
+        print(self.decryptedMessage)
+        Helpers.saveArrayToFile(self.decryptedMessage, "Lab3/Outputs/RsaDecrypted.txt", True)

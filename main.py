@@ -4,6 +4,7 @@ import Lab1.BBS as bbs
 import Lab2.ECB as ecb
 import Lab2.CBC as cbc
 import Lab2.PBC as pbc
+import Lab3.RSA as rsa
 from Lab2 import Helpers
 
 
@@ -51,12 +52,18 @@ def Lab2():
     Helpers.saveDecryptedMessageFromBlocks(pbcObj.encryptedBlocksArray, "Lab2/Outputs/PbcEncrypted.txt")
     Helpers.saveDecryptedMessageFromBlocks(pbcObj.decryptedBlocksArray, "Lab2/Outputs/PbcDecrypted.txt", False)
 
+def Lab3():
+
+    rsaObj = rsa.RSA()
+    rsaObj.Encrypt()
+    rsaObj.Decrypt()
 
 if __name__ == '__main__':
     #Lab1(bbs)
 
-    Lab2()
+    #Lab2()
 
+    Lab3()
     #zadanie 2
     '''
     blockA = bc.blockCipher(text ="asdghe3#$%aasd6rgdFWW$#$yerye6434^#$#4teqRhjSRTnfzetye6s4z5t", key = "xyzW3abdefsykl12")
