@@ -33,12 +33,12 @@ class ECBCipher(object):
             self.encryptedBlocksArray.append(returnArray)
 
     def Decrypt(self):
-        decipher = decipher = AES.new(self.cipherKey, AES.MODE_ECB)
+        decipher = AES.new(self.cipherKey, AES.MODE_ECB)
         for block in self.encryptedBlocksArray:
             returnArray = []
             blockOffset = 16 - len(block)
             while len(block)!=16:
                 block.append(blockOffset)
-            for bit in decipher.decrypt(bytes(block)):
-                returnArray.append(bit)
+            for byte in decipher.decrypt(bytes(block)):
+                returnArray.append(byte)
             self.decryptedBlocksArray.append(returnArray)

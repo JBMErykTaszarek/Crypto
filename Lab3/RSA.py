@@ -7,13 +7,13 @@ from math import ceil
 from Lab2 import Helpers
 
 
-class CBCCipher(object):
+class RSA(object):
     def __init__(self, text="", key=""):
-        self.encryptedBlocksArray = []
-        self.decryptedBlocksArray = []
-        self.cipherKey = b'xyzW3abdefsykl12'
-        self.cipherIV = b'1122334411223344'
-        self.currentCipherIV = self.cipherIV
+        self.p = 31
+        self.q = 19
+        self.n = self.p * self.q
+        self.fi = (self.p-1) * (self.q-1)
+
         if key != "":  # jeżeli użytkownik żadnego nie podał
             tempKey = str.encode(key)
             if len(tempKey) != 16:

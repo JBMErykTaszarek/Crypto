@@ -5,6 +5,24 @@ from textwrap import wrap
 import random
 from math import ceil
 
+def getBytes(bits):
+    blocks = wrap(bits,8)
+    bytes = []
+    for block in blocks:
+        bytes.append(int(block,2))
+    return bytes
+
+def getBits(bytes):
+    outPut =""
+    for b in bytes:
+        outPut+= str(bin(b)[2:]).zfill(8)
+    return outPut
+
+def xor(firstBits,secondBits):
+    outPutBits = ""
+    for i in range(0,len(firstBits)):
+        outPutBits += str(int(firstBits[i]) ^ int(secondBits[i]))
+    return outPutBits
 
 def split(a, n):
     k, m = divmod(len(a), n)
@@ -26,15 +44,15 @@ def prepareText(text):
     paddedText = pad(text)
     return str.encode(paddedText)
 
-def saveDecryptedMessageFromBlocks(blocks, filePath):
+def saveDecryptedMessageFromBlocks(blocks, filePath, isEncrypted=True):
     f = open(filePath, "a", encoding="utf-8")
     f.truncate(0)
     print(blocks)
+    returnString = ""
     for block in blocks:
-        returnString = ""
         for char in block:
             returnString+= chr(char)
-        f.write(returnString + "\n")
+    f.write(unpad(returnString)) if not isEncrypted else f.write(returnString)
 
 def generateInitialVector():
     key = ""

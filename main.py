@@ -2,6 +2,8 @@ import Lab1.Tests as tests
 import Lab1.StreamCipher as stCi
 import Lab1.BBS as bbs
 import Lab2.ECB as ecb
+import Lab2.CBC as cbc
+import Lab2.PBC as pbc
 from Lab2 import Helpers
 
 
@@ -35,7 +37,21 @@ def Lab2():
     ecbObj.Encrypt()
     ecbObj.Decrypt()
     Helpers.saveDecryptedMessageFromBlocks(ecbObj.encryptedBlocksArray, "Lab2/Outputs/EcbEncrypted.txt")
-    Helpers.saveDecryptedMessageFromBlocks(ecbObj.decryptedBlocksArray, "Lab2/Outputs/EcbDecrypted.txt")
+    Helpers.saveDecryptedMessageFromBlocks(ecbObj.decryptedBlocksArray, "Lab2/Outputs/EcbDecrypted.txt", False)
+
+    cbcObj = cbc.CBCCipher("asdghe3#$%aasd6rgdFWW$#$yerye6434^#$#4teqRhjSRTnfzetye6s4z5t", "xyzW3abdefsykl12")
+    cbcObj.Encrypt()
+    cbcObj.Decrypt()
+    Helpers.saveDecryptedMessageFromBlocks(cbcObj.encryptedBlocksArray, "Lab2/Outputs/CbcEncrypted.txt")
+    Helpers.saveDecryptedMessageFromBlocks(cbcObj.decryptedBlocksArray, "Lab2/Outputs/CbcDecrypted.txt", False)
+
+    pbcObj = pbc.PBCCipher("asdghe3#$%aasd6rgdFWW$#$yerye6434^#$#4teqRhjSRTnfzetye6s4z5t", "xyzW3abdefsykl12")
+    pbcObj.Encrypt()
+    pbcObj.Decrypt()
+    Helpers.saveDecryptedMessageFromBlocks(pbcObj.encryptedBlocksArray, "Lab2/Outputs/PbcEncrypted.txt")
+    Helpers.saveDecryptedMessageFromBlocks(pbcObj.decryptedBlocksArray, "Lab2/Outputs/PbcDecrypted.txt", False)
+
+
 if __name__ == '__main__':
     #Lab1(bbs)
 
