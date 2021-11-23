@@ -47,11 +47,12 @@ def prepareText(text):
 def saveDecryptedMessageFromBlocks(blocks, filePath, isEncrypted=True):
     f = open(filePath, "a", encoding="utf-8")
     f.truncate(0)
-    print(blocks)
     returnString = ""
+    k = 0
     for block in blocks:
         for char in block:
             returnString+= chr(char)
+        returnString += " \n"
     f.write(unpad(returnString)) if not isEncrypted else f.write(returnString)
 
 def generateInitialVector():

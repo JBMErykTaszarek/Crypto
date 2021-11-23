@@ -8,8 +8,8 @@ from Lab2 import Helpers
 
 
 class CBCCipher(object):
-    def __init__(self, text="", key=""):
-        self.encryptedBlocksArray = []
+    def __init__(self,enc ):
+        self.encryptedBlocksArray = enc
         self.decryptedBlocksArray = []
         self.cipherKey = b'xyzW3abdefsykl12'
         self.cipherIV = b'1122334411223344'
@@ -27,6 +27,7 @@ class CBCCipher(object):
                 returnArray.append(byt)
             self.encryptedBlocksArray.append(returnArray)
             self.currentCipherIV = returnArray
+        print(self.encryptedBlocksArray)
 
     def Decrypt(self):
         self.currentCipherIV = self.cipherIV
@@ -40,6 +41,4 @@ class CBCCipher(object):
                 returnArray.append(byt)
             xoredResult = Helpers.xor(Helpers.getBits(self.currentCipherIV), Helpers.getBits(returnArray))
             self.currentCipherIV = block
-            print(xoredResult)
             self.decryptedBlocksArray.append(Helpers.getBytes(xoredResult))
-            print(self.decryptedBlocksArray)

@@ -1,1 +1,1 @@
-Some text to encrrypt do it well becouse someone want to read this!
+Here is some message. You need to use good algorithm to encrypt that!

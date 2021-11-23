@@ -49,4 +49,5 @@ def readInput(path):
 def getRandomPrimeNumber():
     primes = [i for i in range(1000, 9999) if isPrime(i)]
     propabblyPrime = random.choice(primes)
+    print(propabblyPrime)
     return propabblyPrime

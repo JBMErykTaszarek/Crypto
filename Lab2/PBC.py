@@ -8,8 +8,8 @@ from Lab2 import Helpers
 
 
 class PBCCipher(object):
-    def __init__(self, text="", key=""):
-        self.encryptedBlocksArray = []
+    def __init__(self, enc, key=""):
+        self.encryptedBlocksArray = enc
         self.decryptedBlocksArray = []
         self.cipherKey = b'xyzW3abdefsykl12'
         self.cipherIV = b'1122334411223344'
@@ -41,4 +41,3 @@ class PBCCipher(object):
             xoredResult = Helpers.xor(Helpers.getBits(self.currentCipherIV), Helpers.getBits(returnArray))
             self.currentCipherIV = Helpers.getBytes(xoredResult)
             self.decryptedBlocksArray.append(Helpers.getBytes(xoredResult))
-            print(self.decryptedBlocksArray)
